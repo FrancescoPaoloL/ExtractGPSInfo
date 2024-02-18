@@ -5,13 +5,13 @@ def get_exif_data(image_path):
         tags = exifread.process_file(f)
     return tags
 
-def extract_gps_location(exif_data):
+def extract_gps_location(exif_data, image_filename):
     if 'GPS GPSLatitude' in exif_data and 'GPS GPSLongitude' in exif_data:
         latitude = exif_data['GPS GPSLatitude']
         longitude = exif_data['GPS GPSLongitude']
         return latitude, longitude
     else:
-        print("GPS data not found in the image EXIF.")
+        print(f"GPS data not found in {image_filename}.")
         return None, None
 
 def save_exif_data_to_file(exif_data, output_file):
